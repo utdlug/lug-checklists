@@ -1,0 +1,96 @@
+\documentclass[12pt,letterpaper,oneside]{article}
+\title{LUG}
+\author{Michael Aldridge}
+\usepackage{latexsym} % for squares for the check-list environment
+\usepackage[margin=1.0in]{geometry}
+\linespread{0}
+\newenvironment{checklist}{%
+	\begin{list}{}{}% whatever you want the list to be
+	\let\olditem\item
+	\renewcommand\item{\olditem[$\Box$] }
+	}{%
+	\end{list}
+}
+
+\begin{document}
+\section*{LUG Streaming Checklist}
+\begin{enumerate}
+\item Gather components
+  \begin{checklist}
+  \item lugStreamer
+  \item lugStreamer Power Cable
+  \item Mouse
+  \item Camera
+  \item USB $\to$ Ethernet adapter
+  \item cat3 cable
+  \end{checklist}
+\item Setup Streaming
+  \begin{checklist}
+  \item Connect lugStreamer's power
+  \item Ensure the ethernet adapter is disconnected (linux4.1 bug)
+  \item Connect the camera to lugStreamer
+  \item Connect a mouse to lugStreamer
+  \item Power on lugStreamer
+  \item Log in as a sudo capable user
+  \item Start X (startx at the prompt)
+  \item Bring up the audio subsystem
+    \begin{enumerate}
+    \item Switch to workspace 2
+    \item Launch pavucontrol
+    \item Select ``Input Devices''
+    \item Verify presence of the Camera's audio source
+    \item Ensure the green ``default'' icon is pressed for the camera
+    \item Verify PulseAudio is getting audio from the camera
+    \end{enumerate}
+  \item Bring up the network
+    \begin{enumerate}
+    \item Switch to workspace 3
+    \item Launch a terminal
+    \item ``watch ip a''
+    \item Connect the USB $\to$ Ethernet Adapter
+    \item Verify that within 15 seconds an address is obtained
+    \item Verify that lugStreamer can ping ``google.com''
+    \end{enumerate}
+  \item Prepare the streaming encoder
+    \begin{enumerate}
+    \item Switch to workspace 1
+    \item Launch obs
+    \item Select the ``LUG'' profile from the Profile menu
+    \item Verify the video feed is stable and well centered
+      \begin{enumerate}
+      \item Is the screen visible?
+      \item Is the area in front of the camera blocked off?
+      \item Will presenters be speaking from a podium?
+      \end{enumerate}
+    \item Verify the audio feed is stable (green bar in the lower middle)
+    \item Verify the stream settings
+      \begin{enumerate}
+      \item Settings $\to$ Stream contains a URL and a stream key
+        \begin{enumerate}
+        \item The url should be ``rtmp://a.rtmp.youtube.com/live2''
+        \item A streaming key can be obtained from ``https://www.youtube.com/live\_dashboard''
+        \end{enumerate}
+      \item Settings $\to$ Output::Recording contains valid settings
+        \begin{enumerate}
+        \item Path: ``/home/lug''
+        \item Recording Quality: ``Same as stream''
+        \item Recording Format: ``mp4''
+        \end{enumerate}
+      \end{enumerate}
+    \end{enumerate}
+  \end{checklist}
+\item Stream!
+  \begin{checklist}
+  \item Click ``Start Recording''
+  \item Wait at least 5 seconds
+  \item Click ``Start Streaming''
+  \end{checklist}
+\item Close out the stream
+  \begin{checklist}
+  \item Click ``Stop Recording''
+  \item Wait at least 5 seconds
+  \item Click ``Stop Streaming''
+  \item Return all items to the LUG Office
+  \end{checklist}
+\end{enumerate}
+\end{document}
